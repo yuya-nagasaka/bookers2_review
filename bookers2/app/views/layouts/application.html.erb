@@ -7,8 +7,26 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <header>
+    <h4>Bookers<h4>
+    <% if user_signed_in? %>
+    <ul>
+      <li><%= link_to "Home" %></li>
+      <li><%= link_to "Users" %></li>
+      <li><%= link_to "Books" %></li>
+      <li><%= link_to "logout" %></li>
+    </ul>
+    <% else %>
+    <ul>
+      <li><%= link_to "Home",root_path %></li>
+      <li><%= link_to "about",about_path %></li>
+      <li><%= link_to "sign up", new_user_registration_path %></li>
+      <li><%= link_to "login",new_user_session_path %></li>
+    </ul>
+  <% end %>
 
   <body>
     <%= yield %>
+  <p>CopyRight Infratop.inc</p>
   </body>
 </html>
