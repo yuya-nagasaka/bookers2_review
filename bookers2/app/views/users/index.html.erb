@@ -1,0 +1,32 @@
+<%# プロフィール編集 %>
+<h2>User info</h2>
+<%= attachment_image_tag current_user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%>
+<p>name <%= current_user.name %></p>
+<p>introduction <%= current_user.introduction %></p>
+<p><button><%= link_to "EDIT",edit_user_path(current_user) %></button></p>
+<%# 新規投稿 %>
+<h2>New Book</h2>
+<%= form_with model:@book,local:true do |f| %>
+  <h3>Title</h3>
+  <%= f.text_field :title %>
+  <h3>Opinion</h3>
+  <%= f.text_area :body %>
+  <p><%= f.submit "Create Book" %></p>
+<% end %>
+
+<%# ユーザー一覧 %>
+<h2>User</h2>
+<table>
+  <tr>
+    <td>image</td>
+    <td>name</td>
+    <td>show</td>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= attachment_image_tag user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%></td>
+      <td><%= user.name %></td>
+      <td><%= link_to "show",user_path(user) %></td>
+    </tr>
+  <% end %>
+</table>

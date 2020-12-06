@@ -1,0 +1,28 @@
+<%# 新規投稿・投稿更新時　サクセスメッセージ %>
+<% if flash[:success] %>
+  <%= flash[:success] %>
+<% end %>
+
+<%# プロフィール編集 %>
+<h2>User info</h2>
+<%= attachment_image_tag @book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%>
+<p>name <%= @book.user.name %></p>
+<p>introduction <%= @book.user.introduction %></p>
+<p><button><%= link_to "EDIT",edit_user_path(current_user) %></button></p>
+<%# 新規投稿 %>
+<h2>New Book</h2>
+<%= form_with model:@new_book,local:true do |f| %>
+  <h3>Title</h3>
+  <%= f.text_field :title %>
+  <h3>Opinion</h3>
+  <%= f.text_area :body %>
+  <p><%= f.submit "Create Book" %></p>
+<% end %>
+<%# 投稿詳細 %>
+<h2>Book Detail</h2>
+<p> <td><%= link_to attachment_image_tag(@book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"),user_path(@book.user) %></td></p>
+<%= @book.user.name %>
+<%= link_to "#{@book.title}",book_path(@book) %>
+<%= @book.body %>
+<button><%= link_to "EDIT",edit_book_path(@book) %></button>
+<button><%= link_to "Destroy",book_path(@book),method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
