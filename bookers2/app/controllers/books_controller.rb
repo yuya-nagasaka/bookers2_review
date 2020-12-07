@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   
+ before_action:correct,only:[:edit]
  
   def index
     @book = Book.new
@@ -43,6 +44,13 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     book.destroy
     redirect_to books_path
+  end
+  
+  def correct
+    @book = Book.find(params[:id])
+    unless @book.user == current_user
+      redirect_to users_path
+    end
   end
   
   private

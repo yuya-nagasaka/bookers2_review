@@ -24,5 +24,7 @@
 <%= @book.user.name %>
 <%= link_to "#{@book.title}",book_path(@book) %>
 <%= @book.body %>
-<button><%= link_to "EDIT",edit_book_path(@book) %></button>
-<button><%= link_to "Destroy",book_path(@book),method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
+<% if @book.user == current_user %>
+  <button><%= link_to "EDIT",edit_book_path(@book) %></button>
+  <button><%= link_to "Destroy",book_path(@book),method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
+<% end %>
