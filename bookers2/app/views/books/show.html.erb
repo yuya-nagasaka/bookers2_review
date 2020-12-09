@@ -1,30 +1,41 @@
-<%# 新規投稿・投稿更新時　サクセスメッセージ %>
-<% if flash[:success] %>
-  <%= flash[:success] %>
-<% end %>
-
-<%# プロフィール編集 %>
-<h2>User info</h2>
-<%= attachment_image_tag @book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%>
-<p>name <%= @book.user.name %></p>
-<p>introduction <%= @book.user.introduction %></p>
-<p><button><%= link_to "EDIT",edit_user_path(current_user) %></button></p>
-<%# 新規投稿 %>
-<h2>New Book</h2>
-<%= form_with model:@new_book,local:true do |f| %>
-  <h3>Title</h3>
-  <%= f.text_field :title %>
-  <h3>Opinion</h3>
-  <%= f.text_area :body %>
-  <p><%= f.submit "Create Book" %></p>
-<% end %>
-<%# 投稿詳細 %>
-<h2>Book Detail</h2>
-<p> <td><%= link_to attachment_image_tag(@book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"),user_path(@book.user) %></td></p>
-<%= @book.user.name %>
-<%= link_to "#{@book.title}",book_path(@book) %>
-<%= @book.body %>
-<% if @book.user == current_user %>
-  <button><%= link_to "EDIT",edit_book_path(@book) %></button>
-  <button><%= link_to "Destroy",book_path(@book),method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%# 新規投稿・投稿更新時　サクセスメッセージ %>
+      <% if flash[:success] %>
+        <%= flash[:success] %>
+      <% end %>
+      <%# プロフィール編集 %>
+      <h4 class="mt-4">User info</h4>
+      <%= attachment_image_tag @book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%>
+       <p class="border-top border-bottom pt-2 pb-2">name　<%= @book.user.name %></p>
+      <p>introduction <%= @book.user.introduction %></p>
+      <p><button class="bg-white w-100  rounded">
+        <%= link_to edit_user_path(@book.user) do %>
+          <i class="fas fa-user-cog text-secondary"></i>
+        <% end %>
+      </button></p>
+      <%# 新規投稿 %>
+      <h2>New book</h2>
+      <%= form_with model:@new_book,local:true do |f| %>
+         <p>Title</p>
+        <%= f.text_field :title,class:"w-100"%>
+        <p class="mt-2">Opinion</p>
+        <%= f.text_area :body,class:"w-100 " %>
+        <p class="mt-2"><%= f.submit "Create Book",class:"text-white bg-success rounded border-0 pt-1 pb-1" %></p>
+      <% end %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <%# 投稿詳細 %>
+      <h4 class="border-bottom mt-4">Book detail</h4>
+      <p><%= link_to attachment_image_tag(@book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"),user_path(@book.user) %></p>
+      <%= link_to "#{@book.user.name}",user_path(@book.user) %>
+      <%= link_to "#{@book.title}",book_path(@book) %>
+      <%= @book.body %>
+      <% if @book.user == current_user %>
+        <button><%= link_to "Edit",edit_book_path(@book) %></button>
+        <button><%= link_to "Destroy",book_path(@book),method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
+      <% end %>
+    </div>
+  </div>
+</div>

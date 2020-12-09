@@ -3,41 +3,49 @@
   <head>
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <% if notice %>
-      <p><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p><%= alert %></p>
-    <% end %>
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="/">Bookers</a>
-            <% if user_signed_in? %>
+        <a class="navbar-brand" href="/">Bookers</a>
+        <% if user_signed_in? %>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="/users/<%= current_user.id %>"><i class="fas fa-home text-white mr-2">Home</i></a>
+            </li>  
+            <li class="nav-item">
+              <a href="/users"><i class="fas fa-users text-white mr-2 ml-2">Users</i></a>
+            </li>
+            <li class="nav-item">
+               <a href="/books"><i class="fas fa-book-open text-white mr-2 ml-2">Books</i></a>
+            </li>
+            <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <i class="fas fa-sign-out-alt text-white mr-2">logout</i>
+                <% end %>
+            </li>
+          </ul>
+          <% else %>
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a href="/user/:id(current_user)"><i class="fas fa-home"></i>Home</a></li>
-              <li class="nav-item"><a href="/users"><i class="fas fa-users"></i>Users</a></li>
-              <li class="nav-item"><a href="/books"><i class="fas fa-book-open"></i>Books</a></li>
-              <li class="nav-item"><a href="/usser/:id(current_user)"><i class="fas fa-sign-out-alt"></i><%= link_to "logout", destroy_user_session_path, method: :delete  %></li>
-            </ul>
-            <% else %>
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a href="/"><i class="fas fa-home"></i>Home</a></li>
-              <li class="nav-item"><a href="/home/about"><i class="fas fa-link"></i>about</a></li>
-              <li class="nav-item"><a href="/users/sign_up"><i class="fas fa-user-plus"></i>sign up</a></li>
-              <li class="nav-item"><a href="/users/sign_in"><i class="fas fa-sign-in-alt"></i>login</a></li>
-            </ul>
-            <% end %>
-          </div>
-        </div>
+              <li class="nav-item">
+                 <a href="/"><i class="fas fa-home text-white mr-2">Home</i></a>
+              </li>
+              <li class="nav-item">
+                 <a href="/home/about"><i class="fas fa-link text-white  mr-2 ml-2">about</i></a>
+              </li>
+              <li class="nav-item">
+                 <a href="/users/sign_up"><i class="fas fa-user-plus text-white mr-2 ml-2">sign up</i></a>
+              </li>
+              <li class="nav-item">
+                <a href="/users/sign_in"> <i class="fas fa-sign-in-alt text-white mr-2">login</i></a>
+              </li>
+           </ul>
+          <% end %>
       </nav>
     </header>
     <%= yield %>
-  <p>CopyRight Infratop.inc</p>
+  <p class="text-center">CopyRight Infratop.inc</p>
   </body>
 </html>

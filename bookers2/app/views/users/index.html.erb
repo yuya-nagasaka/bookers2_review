@@ -1,32 +1,45 @@
-<%# プロフィール編集 %>
-<h2>User info</h2>
-<%= attachment_image_tag current_user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%>
-<p>name <%= current_user.name %></p>
-<p>introduction <%= current_user.introduction %></p>
-<p><button><%= link_to "EDIT",edit_user_path(current_user) %></button></p>
-<%# 新規投稿 %>
-<h2>New Book</h2>
-<%= form_with model:@book,local:true do |f| %>
-  <h3>Title</h3>
-  <%= f.text_field :title %>
-  <h3>Opinion</h3>
-  <%= f.text_area :body %>
-  <p><%= f.submit "Create Book" %></p>
-<% end %>
-
-<%# ユーザー一覧 %>
-<h2>User</h2>
-<table>
-  <tr>
-    <td>image</td>
-    <td>name</td>
-    <td>show</td>
-  </tr>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= attachment_image_tag user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%></td>
-      <td><%= user.name %></td>
-      <td><%= link_to "show",user_path(user) %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="container">
+  
+  <div class="row">
+    <div class="col-md-3">
+      
+      <%# プロフィール編集 %>
+      <h4 class="mt-4">User info</h4>
+      <%= attachment_image_tag current_user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%>
+      <p class="border-top border-bottom pt-2 pb-2">name　　　　<%= current_user.name %></p>
+      <p>introduction　<%= current_user.introduction %></p>
+      <p><button class="bg-white w-100  rounded">
+        <%= link_to edit_user_path(current_user) do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      </button></p>
+      <%# 新規投稿 %>
+      <h4>New book</h4>
+      <%= form_with model:@book,local:true do |f| %>
+        <p>Title</p>
+        <%= f.text_field :title,class:"w-100"%>
+        <p class="mt-2">Opinion</p>
+        <%= f.text_area :body,class:"w-100 " %>
+        <p class="mt-2"><%= f.submit "Create Book",class:"text-white bg-success rounded border-0 pt-1 pb-1" %></p>
+      <% end %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <%# ユーザー一覧 %>
+      <h2 class="mt-2">Users</h2>
+      <table class="w-100">
+        <tr class="border-top border-bottom">
+          <td class="pt-2 pb-2">image</td>
+          <td>name</td>
+          <td>　</td>
+        </tr>
+        <% @users.each do |user| %>
+          <tr class="border-top border-bottom">
+            <td class="pt-2 pb-2"><%= attachment_image_tag user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%></td>
+            <td><%= user.name %></td>
+            <td><%= link_to "Show",user_path(user) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

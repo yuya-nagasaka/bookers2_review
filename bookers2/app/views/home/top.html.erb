@@ -1,6 +1,19 @@
-<h2>welcome to <i class="fas fa-book"></i>Bookers !!</h2>
-<p>In <i class="fas fa-book"></i>Bookers,</br>
-you can share and exchange your opinions , inpressions , and emotions</br>
-about various books!</p>
-<button><%= link_to "login",new_user_session_path%></button>
-<button><%= link_to "sign up", new_user_registration_path %></button>
+<% if notice %>
+  <p><%= notice %></p>
+<% end %> 
+<% if alert %>
+  <p><%= alert %></p>
+<% end %>
+
+<div  class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="mt-3">welcome to <i class="fas fa-book"></i><strong>Bookers</strong> !!</h2>
+      <p>In <i class="fas fa-book"></i><strong>Bookers</strong>,</br>
+      <br class="mt-3">you can share and exchange your opinions , inpressions , and emotions</br>
+      <br class="mt-3">about various books!</br></p>
+      <p class="text-center"><button class="bg-info w-75 rounded border-0"><%= link_to "Log in",new_user_session_path,class:"text-white"%></button></p>
+      <p class="text-center"><button class="bg-success w-75 rounded border-0 mb-4"><%= link_to "Sign Up", new_user_registration_path,class:"text-white" %></button></p>
+    </div>
+  </div>
+</div>
