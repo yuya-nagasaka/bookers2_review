@@ -1,19 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%# ユーザー情報更新時　サクセスメッセージ %>
-      <% if flash[:success] %>
-        <%= flash[:success] %>
-      <% end %>
-      <%# login・signup時サクセスメッセージ %>
-      <% if notice %>
-        <p><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p><%= alert %></p>
-      <% end %>
-    
-      
+      <%= render 'layouts/message', book: @book %>
       <%# プロフィール編集 %>
       <h4 class="mt-4">User info</h4>
       <%= attachment_image_tag @user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%>
@@ -25,14 +13,7 @@
         <% end %>
       </button></p>
       <%# 新規投稿 %>
-      <h4>New book</h4>
-      <%= form_with model:@new_book,local:true do |f| %>
-        <p>Title</p>
-        <%= f.text_field :title,class:"w-100"%>
-        <p class="mt-2">Opinion</p>
-        <%= f.text_area :body,class:"w-100 " %>
-        <p class="mt-2"><%= f.submit "Create Book",class:"text-white bg-success rounded border-0 pt-1 pb-1" %></p>
-      <% end %>
+       <%= render 'books/new_book',book: @book %>
     </div>
     <div class="col-md-8 offset-md-1">
       <%# ユーザー別投稿一覧 %>

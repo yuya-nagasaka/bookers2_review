@@ -1,0 +1,24 @@
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p><%= alert %></p>
+<% end %>
+
+<% if flash[:success] %>
+  <%= flash[:success] %>
+<% end %>
+<% if flash[:false] %>
+  <%= flash[:false] %>
+<% end %>
+
+<% if book.errors.any? %>
+  <%= book.errors.count %>件のエラーが発生しました
+  <% book.errors.full_messages.each do |book| %>
+    <%= book %>
+  <% end %>
+<% end %>
+
+
+
+ 
