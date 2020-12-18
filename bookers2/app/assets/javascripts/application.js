@@ -19,11 +19,3 @@
 //= require_tree .
 //= require jquery
 
-$(document).ready(function () {
-  $('.jquery').on('click', function(){
-    $(this).css('color','red');
-  });
-});
-
-var title = "javascriptが使えました";
-alert(title);
