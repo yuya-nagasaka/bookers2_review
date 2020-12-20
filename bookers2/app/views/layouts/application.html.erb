@@ -27,6 +27,13 @@
                 <% end %>
             </li>
           </ul>
+          <div>
+          <%= form_with url: search_path, method: :get, local: true do |form| %>
+            <%= form.text_field :search %>
+            <%= form.submit 'Search', name: nil %>
+          <% end %>
+          </div>
+         
           <% else %>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
