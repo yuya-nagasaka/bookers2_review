@@ -27,14 +27,10 @@
                 <% end %>
             </li>
           </ul>
-          <div>
-          <%= form_with url: search_path, method: :get, local: true do |form| %>
-            <%= form.text_field :search %>
-            <%= form.submit 'Search', name: nil %>
-          <% end %>
-          </div>
-         
-          <% else %>
+       
+        <% else %>
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/">Bookers</a>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
                  <a href="/"><i class="fas fa-home text-white mr-2">Home</i></a>

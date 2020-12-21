@@ -26,4 +26,18 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+  
+  def self.search(search,search_way)
+    if search_way == "1"
+      @user = User.where("name LIKE?","#{search}%")
+    elsif search_way == "2"
+      @user = User.where("name LIKE?","%#{search}")
+    elsif search_way == "3"
+      @user = User.where(name: search)
+    elsif search_way == "4"
+      @user = User.where("name LIKE?","%#{search}%")
+    else
+      @user = User.all
+    end
+  end
 end

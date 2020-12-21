@@ -27,6 +27,7 @@
     </div>
     <div class="col-md-8 offset-md-1">
       <%# 投稿詳細 %>
+      <p><%= render 'searchs/form' %></p>
       <h4 class="border-bottom mt-4">Book detail</h4>
       <p><%= link_to attachment_image_tag(@book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"),user_path(@book.user) %></p>
       <%= link_to "#{@book.user.name}",user_path(@book.user) %>

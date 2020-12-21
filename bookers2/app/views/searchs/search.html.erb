@@ -1,8 +1,54 @@
-<h2>Books Serch for </h2>
-<% @books.each do |book| %>
-  <tr class="border-top border-bottom">
-    <td class="pt-2 pb-2"><%= attachment_image_tag book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%></td>
-    <td><%= book.title %></td>
-    <td><%= book.body %></td>
-  </tr>
-<% end %>
+<% if @range == '1' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/profile_edit',user: @user%>
+      <%= render 'books/new_book',book: @book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <p class="mt-4"><%= render 'searchs/form' %></p>
+      <p><h2>User serch for <%= params[:search] %> </h2></p>
+      <table class="w-100">
+        <tr class="border-top border-bottom">
+          <td class="pt-2 pb-2">image</td>
+          <td>name</td>
+        </tr>
+        <% @users.each do |user| %>
+          <tr class="border-top border-bottom">
+            <td class="pt-2 pb-2"><%= attachment_image_tag user, :profile_image, size: "60x60" , fallback: "no_image.jpg"%></td>
+            <td><%= user.name %></td>
+            <td><%= link_to "Show",user_path(user) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+<% else %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/profile_edit' %>
+      <%= render 'books/new_book',book: @book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <p class="mt-4"><%= render 'searchs/form' %></p>
+      <h2 class= "mt-4">Books serch for <%= params[:search] %> </h2>
+      <table class="w-100">
+        <tr class="w-100 border-top border-bottom">
+          <td>　</td>
+          <td class="pt-2 pb-2">Title</td>
+          <td>Opinion</td>
+        </tr>
+        <% @books.each do |book| %>
+          <tr class="border-top border-bottom">
+            <td class="pt-2 pb-2"><%= link_to attachment_image_tag(book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"),user_path(book.user) %></td>
+            <td><%= link_to "#{book.title}",book_path(book) %></td>
+            <td><%= book.body %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+<%end%>
