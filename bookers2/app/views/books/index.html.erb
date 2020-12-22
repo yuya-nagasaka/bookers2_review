@@ -3,9 +3,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'layouts/message', book: @book %>
+      <%= render 'layouts/message', book: @new_book %>
       <%= render 'users/profile_edit' %>
-      <%= render 'books/new_book',book: @book %>
+      <%= render 'books/new_book',book: @new_book %>
     </div>
     <div class="col-md-8 offset-md-1">
       <p><%= render 'searchs/form' %></p>
@@ -21,19 +21,8 @@
             <td class="pt-2 pb-2"><%= link_to attachment_image_tag(book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"),user_path(book.user) %></td>
             <td><%= link_to "#{book.title}",book_path(book) %></td>
             <td><%= book.body %></td>
-            <td><% if book.favorited_by?(current_user) %>
-        　     <p>
-                <%= link_to book_favorites_path(book), method: :delete do %>
-                  ♥<%= book.favorites.count %> いいね
-                <% end %>
-              </p>
-            <% else %>
-              <p>
-                <%= link_to book_favorites_path(book), method: :post do %>
-                  ♡<%= book.favorites.count %> いいね
-                <% end %>
-              </p>
-            <% end %>
+            <td id = "favorite-<%=book.id %>-btn-2">
+              <%= render 'favorites/favorite-btn-2', book: book %>
             </td>
             <td><p><%= link_to "#{book.book_comments.count} コメント", book_path(book) %></p></td>
           </tr>

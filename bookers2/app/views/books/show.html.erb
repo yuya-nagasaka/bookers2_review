@@ -27,8 +27,8 @@
     </div>
     <div class="col-md-8 offset-md-1">
       <%# 投稿詳細 %>
-      <p><%= render 'searchs/form' %></p>
       <h4 class="border-bottom mt-4">Book detail</h4>
+      <div><%= render 'searchs/form' %></div>
       <p><%= link_to attachment_image_tag(@book.user, :profile_image, size: "60x60" , fallback: "no_image.jpg"),user_path(@book.user) %></p>
       <%= link_to "#{@book.user.name}",user_path(@book.user) %>
       <%= link_to "#{@book.title}",book_path(@book) %>
@@ -36,20 +36,6 @@
       <% if @book.user == current_user %>
         <button><%= link_to "Edit",edit_book_path(@book) %></button>
         <button><%= link_to "Destroy",book_path(@book),method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
-      <% end %>
-      
-       <% if @book.favorited_by?(current_user) %>
-        <p>
-          <%= link_to book_favorites_path(@book), method: :delete do %>
-            ♥<%= @book.favorites.count %> いいね
-          <% end %>
-        </p>
-        <% else %>
-        <p>
-          <%= link_to book_favorites_path(@book), method: :post do %>
-            ♡<%= @book.favorites.count %> いいね
-          <% end %>
-        </p>
       <% end %>
       
       <div class="comments">
@@ -64,6 +50,10 @@
           </div>
         <% end %>
       <% end %>
+      
+      <div id = "favorite-<%=@book.id %>-btn">
+        <%= render partial: 'favorites/favorite-btn', locals: {book: @book} %>
+      </div>
       </div>
       <div class="new-comment">
         
